@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+
+  AWSEnabledApp:
+    image: awsenabledapp
+    restart: always
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3307/appdb1
+      SPRING_DATASOURCE_USERNAME: silversky
+      SPRING_DATASOURCE_PASSWORD: sliver123
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: appdb1
+      MYSQL_USER: silversky
+      MYSQL_PASSWORD: sliver123
+    ports:
+      - "3307:3306"
